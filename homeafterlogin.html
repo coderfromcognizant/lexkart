@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.72.0">
+    <title>AEP Website</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="canonical" href="https://v5.getbootstrap.com/docs/5.0/examples/product/">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <script src="https://assets.adobedtm.com/236ca7d75265/b253769f3362/launch-8535b9c680b1-development.min.js" async></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="./js/display.js"></script>
+    <script>
+        var digitalData = {
+            "page": {
+                "pageInfo" : {
+                    "pageName": "Home"
+                    }
+                },
+                "user": {
+                    "profile": {
+                        "profileInfo": {},
+                        "attributes": {
+                            "loggedIn": true
+                        }
+                    }                    
+                }                
+        } ;
+
+        $(document).ready(function() {
+            document.getElementById("displayUsername").innerHTML = "Hi <b>"+sessionStorage.getItem('username')+"</b>";
+            document.getElementById("accordion").innerHTML = sessionStorage.getItem('username');
+            document.getElementById("textcrmid").innerHTML = sessionStorage.getItem('email');
+            if( typeof _satellite != "undefined" ){
+                var customerIDService=_satellite.getVisitorId();
+                var ECID = customerIDService._fields.MCMID;
+                document.getElementById("textecid").innerHTML = ECID;
+            }else{    
+                console.log("Cannot fetch ECID");
+    }
+        });
+
+    </script>
+    <style>
+        .container {
+            max-width: 960px;
+        }
+        
+        .add-to-cart img {
+            width: 40px;
+            height: 35px;
+        }
+        
+        #user {
+            padding-left: 30px;
+            padding-right: 30px;
+            display: inline-block;
+        }
+        
+        .user {
+            margin-bottom: 30px;
+            display: inline-block;
+            display: flex;
+            align-items: center;
+            margin-top: 40px;
+        }
+        
+        .cartT {
+            position: relative;
+            display: block;
+            width: 28px;
+            height: 28px;
+            height: auto;
+            overflow: hidden;
+        }
+        
+        .material-icons {
+            position: relative;
+            top: 4px;
+            z-index: 1;
+            font-size: 24px;
+            color: black;
+        }
+        
+        .count {
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 2;
+            font-size: 11px;
+            border-radius: 50%;
+            background: #d60b28;
+            width: 16px;
+            height: 16px;
+            line-height: 16px;
+            display: block;
+            text-align: center;
+            color: white;
+            font-family: 'Roboto', sans-serif;
+            font-weight: bold;
+        }
+        
+        .xray-top {
+            position: sticky;
+            background-color: black;
+            top: 0;
+            z-index: 100;
+            color: white;
+            display: inline-block;
+            width: 100%;
+            padding-left: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!--------------------- AEP X-RAY Section Starts -------------------------->
+
+    <div class="xray-top" data-bs-toggle="offcanvas" href="#offcanvasExample" aria-controls="offcanvasExample">
+        Adobe Experience Platform X-RAY <i class="fa fa-plus" style="font-size:16px; margin-left: 10px;"></i>
+    </div>
+
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+            <div class="user">
+                <img id="user" src="brand/user-image.jpg" height="48px" />
+                <h6 id="accordion" style="color: black;">Anonymous User</h6>
+            </div>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" style="padding-right: 3rem;"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne"><img src="brand/adobe logo.png"
+                                style="width:30px; height:30px; background-size:auto, 30px; margin-right: 10px;">
+                            Real-Time Customer Profile
+                        </button>
+                    </h2>
+                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="approved" style="display: block;"> <br>
+                                <div class="xray-session-title">Identities</div><span class="analytics">Experience Cloud ID:
+                                    <br><span id="textecid"></span><br><br></span> <span id="textuuid" class="analytics"></span> <span class="analytics">EMAIL ID: <br><span  id="textcrmid"></span></span><br><br></span> <span id="textmobilenr" class="analytics">Mobile Number ID:
+                                    <br>Not Available<br><br></span> <br>
+                                <div class="xray-session-title">Segment Memberships</div><span id="segmentMemberships" class="analytics">No Segments Available</span> <br>
+                                <div class="xray-session-title">Profile Information</div><span id="platformFirstName" class="analytics">No Information Available</span> <span id="platformLastName" class="analytics"></span><span id="platformEmail" class="analytics"></span> <span id="platformGender"
+                                    class="analytics"></span><span id="platformAddress" class="analytics"></span> <span id="platformCity" class="analytics"></span><span id="platformShoeSize" class="" style="display:block;font-weight:100;"></span> <span id="platformShirtSize"
+                                    class="" style="display:block;font-weight:100;"></span> <span id="platformPreferredColor" class="" style="display:block;font-weight:100;"></span>
+                                <br> <span id="platformPicture" class="analytics"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo"><img src="brand/adobe logo.png"
+                                style="width:30px; height:30px; background-size:auto, 30px; margin-right: 10px;">
+                            Experience Events
+                        </button>
+                    </h2>
+                    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="approved" style="display: block;"> <br>
+                                <div class="xray-session-title">Browse Activity</div>
+                                <table id="productViewActivity" style="width: 250px;font-size: 12px;">No Information Available
+                                </table> <br>
+                                <div class="xray-session-title">Product - Add To Cart</div>
+                                <table id="addToCartActivity" style="width: 250px;font-size: 12px;">No Information Available
+                                </table> <br>
+                                <div class="xray-session-title">Product - Purchases</div>
+                                <table id="purchaseActivity" style="width: 250px;font-size: 12px;">No Information Available
+                                </table> <br>
+                                <div class="xray-session-title">Other Events</div>
+                                <table id="otherEventsActivity" style="width: 250px;font-size: 12px;">No Information Available
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree"><img src="brand/adobe logo.png"
+                                style="width:30px; height:30px; background-size:auto, 30px; margin-right: 10px;">
+                            Sensei Services
+                        </button>
+                    </h2>
+                    <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="approved" style="display: block;"> <br>
+                                <div class="xray-session-title">Browse Activity</div>
+                                <table id="productViewActivity" style="width: 250px;font-size: 12px;">No Information Available
+                                </table> <br>
+                                <div class="xray-session-title">Product - Add To Cart</div>
+                                <table id="addToCartActivity" style="width: 250px;font-size: 12px;">No Information Available
+                                </table> <br>
+                                <div class="xray-session-title">Product - Purchases</div>
+                                <table id="purchaseActivity" style="width: 250px;font-size: 12px;">No Information Available
+                                </table> <br>
+                                <div class="xray-session-title">Other Events</div>
+                                <table id="otherEventsActivity" style="width: 250px;font-size: 12px;">No Information Available
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour"><img src="brand/adobe logo.png"
+                                style="width:30px; height:30px; background-size:auto, 30px; margin-right: 10px;">
+                            Offer Decisioning
+                        </button>
+                    </h2>
+                    <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="approved" style="display: block;"> <br>
+                                <div class="xray-session-title">Browse Activity</div>
+                                <table id="productViewActivity" style="width: 250px;font-size: 12px;">No Information Available
+                                </table> <br>
+                                <div class="xray-session-title">Product - Add To Cart</div>
+                                <table id="addToCartActivity" style="width: 250px;font-size: 12px;">No Information Available
+                                </table> <br>
+                                <div class="xray-session-title">Product - Purchases</div>
+                                <table id="purchaseActivity" style="width: 250px;font-size: 12px;">No Information Available
+                                </table> <br>
+                                <div class="xray-session-title">Other Events</div>
+                                <table id="otherEventsActivity" style="width: 250px;font-size: 12px;">No Information Available
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--------------------- AEP X-RAY Section Ends ---------------------------->
+
+    <!----------------------- Navigation Bar Starts --------------------------->
+
+    <div class="logo" style="padding: 30px; display: flex; max-width: 100%;">
+        <span href="http://127.0.0.1:5500/index.html" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+            <h1>LexKart</h1>
+        </span>
+        <div class="cart-logo" style="padding: 10px;">
+            <i class="fas fa-shopping-cart material-icons"></i>
+        </div>
+        
+    </div>
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="homeafterlogin.html"><b>Home</b><span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://ac283eu.adobesandbox.com/webApp/APP71?id=0"><b>Contact Us</b></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><b>Logout</b></a>
+                    </li>
+                </ul>
+            </div>
+            <div id="displayUsername" class="uk-navbar-right" style="width: 10%;"></div>
+            <div class="uk-navbar-right">
+                <a class="nav-link active" href="cart.html">
+                    <div class="cartT">
+                        <span class="cart-qty count"></span>
+                        <!--   <span class="count">1</span> -->
+                        <i class="fas fa-shopping-cart material-icons"></i>
+                        <!-- <i class="material-icons">shopping_cart</i> -->
+                    </div>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!----------------------- Navigation Bar Ends --------------------------->
+
+    <!----------------------- Hero Section Starts --------------------------->
+
+    <div class="p-5 text-center bg-image rounded-3" style="
+    background-image: url('brand/shopping_mart.jpg');
+    width: 1400pxpx; height: 400px; background-repeat: no-repeat; background-size: cover; background-position: center;">
+    </div>
+
+    <!----------------------- Hero Section Ends ------------------------------>
+
+    <!----------------------- Card Section Starts ---------------------------->
+
+    <div class="container my-3">
+        <div class="row row-cols-3" style="margin-bottom: 40px;">
+            <div data-id="1" class="card" style="width: 18rem; margin-top: 40px; margin-right: 20px;">
+                <img src="brand/bottles.png" class="card-img-top" alt="Bottles" style="height: 205px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">Water Bottles Pack</h5>
+                    <p class="card-text">Price: $5</p>
+                    <div class="add-to-cart">
+                        <button id="addtocartbutton" class="btn btn-outline-primary add-cart" data-toggle="modal" data-target="#added">
+                            &nbsp; Add to cart
+                        </button>
+                        <p class="cartTable subtotal payable-total insideForm" hidden></p>
+                    </div>
+                    <!-- <button class="cart-button">
+                            <span class="add-to-cart">Add to cart</span>
+                            <span class="added">Added</span>
+                            <i class="fas fa-shopping-cart"></i>
+                            <i class="fas fa-box"></i>
+                        </button> -->
+
+
+                </div>
+            </div>
+
+            <div data-id="2" class="card" style="width: 18rem; margin-top: 40px; margin-right: 20px;">
+                <img src="brand/Nivea.jpg" class="card-img-top" alt="Nivea Products" style="height: 205px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">Nivea Skin Care Pack</h5>
+                    <p class="card-text">Price: $75</p>
+                    <div class="add-to-cart">
+                        <button id="addtocartbutton" class="btn btn-outline-primary add-cart" data-toggle="modal" data-target="#added">
+                            &nbsp; Add to cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div data-id="3" class="card" style="width: 18rem; margin-top: 40px; margin-right: 20px;">
+                <img src="brand/adidas.jpeg" class="card-img-top" alt="Adidas Shoes" style="height: 205px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">Adidas Sport Shoes</h5>
+                    <p class="card-text">Price: $50</p>
+                    <div class="add-to-cart">
+                        <button id="addtocartbutton" class="btn btn-outline-primary add-cart" data-toggle="modal" data-target="#added">
+                            &nbsp; Add to cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div data-id="4" class="card" style="width: 18rem; margin-top: 40px; margin-right: 20px;">
+                <img src="brand/shirt.jpeg" class="card-img-top" alt="Shirt" style="height: 205px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">Lenin Shirt Men</h5>
+                    <p class="card-text">Price: $30</p>
+                    <div class="add-to-cart">
+                        <button id="addtocartbutton" class="btn btn-outline-primary add-cart " data-toggle="modal" data-target="#added">
+                            &nbsp; Add to cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div data-id="5" class="card" style="width: 18rem; margin-top: 40px; margin-right: 20px;">
+                <img src="brand/water-purifier.jpg" class="card-img-top" alt="Water Purifier" style="height: 205px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">Water Purifier</h5>
+                    <p class="card-text">Price: $110</p>
+                    <div class="add-to-cart">
+                        <button id="addtocartbutton" class="btn btn-outline-primary add-cart" data-toggle="modal" data-target="#added">
+                            &nbsp; Add to cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div data-id="6" class="card" style="width: 18rem; margin-top: 40px; margin-right: 20px;">
+                <img src="brand/headphones.jpg" class="card-img-top" alt="Headphones" style="height: 205px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">Bluetooth Headphones</h5>
+                    <p class="card-text">Price: $95</p>
+                    <div class="add-to-cart">
+                        <button id="addtocartbutton" class="btn btn-outline-primary add-cart" data-toggle="modal" data-target="#added">
+                            &nbsp; Add to cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!----------------------- Card Section Ends ----------------------------->
+    <!---------------------- Footer Section Starts -------------------------->
+
+    <footer class="text-center text-lg-start bg-light text-muted">
+        <!-- Section: Social media -->
+        <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+            <!-- Left -->
+            <div class="me-5 d-none d-lg-block">
+                <span>Get connected with us on social networks:</span>
+            </div>
+            <!-- Left -->
+
+            <!-- Right -->
+            <div>
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-google"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+            <!-- Right -->
+        </section>
+        <!-- Section: Social media -->
+
+        <!-- Section: Links  -->
+        <section class="">
+            <div class="container text-center text-md-start mt-5">
+                <!-- Grid row -->
+                <div class="row mt-3">
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <!-- Content -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            <i class="fas fa-gem me-3"></i>LEXKART
+                        </h6>
+                        <p>
+                            LexKart houses everything you can possibly imagine, from trending electronics like laptops,smartphones, and mobile accessories to fashion staples like shoes, clothing and lifestyle accessories, we got them all covered.
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Products
+                        </h6>
+                        <p>
+                            <a href="#!" class="text-reset">Electronics</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Clothing</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">SkinCare Products</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Groceries</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Useful links
+                        </h6>
+                        <p>
+                            <a href="#!" class="text-reset">Pricing</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Settings</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Orders</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Help</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+                        <p><i class="fas fa-home me-3"></i> New York, NY 10012, US</p>
+                        <p>
+                            <i class="fas fa-envelope me-3"></i> info@example.com
+                        </p>
+                        <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
+                        <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+            </div>
+        </section>
+        <!-- Section: Links  -->
+
+        <!-- Copyright -->
+        <div class="text-center p-4" style="background-color: rgba(115,115,141,0.541); color: black;">
+            © 2022 Copyright: All Right Reserved
+        </div>
+        <!-- Copyright -->
+    </footer>
+
+    <!---------------------- Footer Section Ends -------------------------->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
